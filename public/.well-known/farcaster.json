@@ -1,0 +1,30 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "TaskFlow",
+    "subtitle": "Built with Zara",
+    "description": "TaskFlow is a Base Mini App built with Zara.",
+    "iconUrl": "https://0co.to/images/zara-2.png",
+    "homeUrl": "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app",
+    "splashImageUrl": "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app/splash.png",
+    "splashBackgroundColor": "#000000",
+    "heroImageUrl": "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app/image.png",
+    "tagline": "TaskFlow",
+    "screenshotUrls": [
+      "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app/screenshot.png",
+      "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app/screenshot.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "base",
+      "miniapp",
+      "onchainkit"
+    ],
+    "webhookUrl": "https://c3a767100b9645a3abeb241349014a03-m49t.vercel.app/api/webhook"
+  }
+}
