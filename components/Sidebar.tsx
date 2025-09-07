@@ -13,9 +13,9 @@ export function Sidebar() {
     hasNotificationAccess,
     hasProjectLinking,
     setActiveSection,
-    setAddTaskModalOpen,
-    setAuthModalOpen,
-    setPremiumModalOpen,
+    openAddTaskModal,
+    openAuthModal,
+    openPremiumModal,
   } = useTaskFlowStore();
 
   const { logout } = useAuth();
@@ -29,20 +29,20 @@ export function Sidebar() {
 
   const handleAddTask = () => {
     if (!isAuthenticated) {
-      setAuthModalOpen(true);
+      openAuthModal();
       return;
     }
-    setAddTaskModalOpen(true);
+    openAddTaskModal();
   };
 
   const handleMenuClick = (itemId: string, isPremium: boolean) => {
     if (!isAuthenticated) {
-      setAuthModalOpen(true);
+      openAuthModal();
       return;
     }
 
     if (isPremium) {
-      setPremiumModalOpen(true);
+      openPremiumModal();
       return;
     }
 
@@ -81,7 +81,7 @@ export function Sidebar() {
           
           <div className="flex gap-2">
             <button
-              onClick={() => setPremiumModalOpen(true)}
+              onClick={() => openPremiumModal()}
               className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs py-1.5 px-2 rounded flex items-center justify-center gap-1 hover:from-purple-700 hover:to-blue-700 transition-colors"
             >
               <Crown size={12} />
@@ -98,7 +98,7 @@ export function Sidebar() {
         </div>
       ) : (
         <button
-          onClick={() => setAuthModalOpen(true)}
+          onClick={() => openAuthModal()}
           className="btn-primary w-full mb-6 flex items-center justify-center space-x-2"
         >
           <User className="w-5 h-5" />

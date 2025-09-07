@@ -7,7 +7,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import { LoadingSpinner } from './LoadingSpinner';
 
 export function AuthModal() {
-  const { isAuthModalOpen, setAuthModalOpen, isLoading } = useTaskFlowStore();
+  const { isAuthModalOpen, closeAuthModal, isLoading } = useTaskFlowStore();
   const { authenticateWithFarcaster } = useAuth();
   const [step, setStep] = useState<'connect' | 'verify'>('connect');
 
@@ -21,7 +21,7 @@ export function AuthModal() {
     // Simulate authentication
     setTimeout(() => {
       authenticateWithFarcaster(12345, 'mock-signature', 'mock-message');
-      setAuthModalOpen(false);
+      closeAuthModal();
       setStep('connect');
     }, 2000);
   };
@@ -30,7 +30,7 @@ export function AuthModal() {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="glass-card max-w-md w-full p-6 relative">
         <button
-          onClick={() => setAuthModalOpen(false)}
+          onClick={() => closeAuthModal()}
           className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
         >
           <X size={20} />

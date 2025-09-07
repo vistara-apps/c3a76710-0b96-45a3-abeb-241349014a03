@@ -50,7 +50,7 @@ const FEATURES = [
 ];
 
 export function PremiumModal() {
-  const { isPremiumModalOpen, setPremiumModalOpen, user, isLoading } = useTaskFlowStore();
+  const { isPremiumModalOpen, closePremiumModal, user, isLoading } = useTaskFlowStore();
   const { refreshUserFeatures } = useAuth();
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -91,7 +91,7 @@ export function PremiumModal() {
 
       if (response.ok) {
         await refreshUserFeatures(user.userId);
-        setPremiumModalOpen(false);
+        closePremiumModal();
       }
     } catch (error) {
       console.error('Purchase error:', error);
@@ -105,7 +105,7 @@ export function PremiumModal() {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="glass-card max-w-4xl w-full max-h-[90vh] overflow-y-auto p-6 relative">
         <button
-          onClick={() => setPremiumModalOpen(false)}
+          onClick={() => closePremiumModal()}
           className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
         >
           <X size={20} />

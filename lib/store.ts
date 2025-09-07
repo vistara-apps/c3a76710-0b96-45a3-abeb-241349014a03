@@ -46,6 +46,14 @@ interface TaskFlowState {
   setNotificationAccess: (access: boolean) => void;
   setProjectLinking: (access: boolean) => void;
   
+  // Modal actions
+  openAddTaskModal: () => void;
+  closeAddTaskModal: () => void;
+  openAuthModal: () => void;
+  closeAuthModal: () => void;
+  openPremiumModal: () => void;
+  closePremiumModal: () => void;
+  
   // Computed getters
   getTodayTasks: () => Task[];
   getThisWeekTasks: () => Task[];
@@ -136,6 +144,14 @@ export const useTaskFlowStore = create<TaskFlowState>()(
       setPremiumModalOpen: (open) => set({ isPremiumModalOpen: open }),
       setNotificationAccess: (access) => set({ hasNotificationAccess: access }),
       setProjectLinking: (access) => set({ hasProjectLinking: access }),
+      
+      // Modal actions
+      openAddTaskModal: () => set({ isAddTaskModalOpen: true }),
+      closeAddTaskModal: () => set({ isAddTaskModalOpen: false }),
+      openAuthModal: () => set({ isAuthModalOpen: true }),
+      closeAuthModal: () => set({ isAuthModalOpen: false }),
+      openPremiumModal: () => set({ isPremiumModalOpen: true }),
+      closePremiumModal: () => set({ isPremiumModalOpen: false }),
 
       // Computed getters
       getTodayTasks: () => {

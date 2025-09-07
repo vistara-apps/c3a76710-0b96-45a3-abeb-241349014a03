@@ -25,11 +25,11 @@ export default function TaskFlowApp() {
     user,
     tasks,
     projects,
-    isAddTaskModalOpen,
-    setActiveSection,
     toggleTask,
-    setAddTaskModalOpen,
+    isAddTaskModalOpen,
     addTask,
+    closeAddTaskModal,
+    setActiveSection,
   } = useTaskFlowStore();
 
   const { initializeAuth } = useAuth();
@@ -51,6 +51,28 @@ export default function TaskFlowApp() {
 
     initialize();
   }, [setFrameReady, initializeAuth, loadUserData, isAuthenticated]);
+
+  // Handle adding new tasks
+  const handleAddTask = (taskData: {
+    title: string;
+    description?: string;
+    dueDate: Date;
+    projectId?: string;
+  }) => {
+    const newTask = {
+      taskId: `task_${Date.now()}`,
+      userId: user?.userId || 'anonymous',
+      title: taskData.title,
+      description: taskData.description || '',
+      dueDate: taskData.dueDate,
+      projectId: taskData.projectId,
+      isCompleted: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    addTask(newTask);
+    closeAddTaskModal();
+  };
 
   const renderContent = () => {
     if (isLoading) {
@@ -105,22 +127,8 @@ export default function TaskFlowApp() {
       {/* Modals */}
       <AddTaskModal 
         isOpen={isAddTaskModalOpen}
-        onClose={() => setAddTaskModalOpen(false)}
-        onAddTask={(taskData) => {
-          const newTask = {
-            taskId: `task-${Date.now()}`,
-            userId: user?.userId || 'anonymous',
-            title: taskData.title,
-            description: taskData.description || '',
-            isCompleted: false,
-            dueDate: taskData.dueDate,
-            projectId: taskData.projectId,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          };
-          addTask(newTask);
-          setAddTaskModalOpen(false);
-        }}
+        onClose={closeAddTaskModal}
+        onAddTask={handleAddTask}
         projects={projects}
       />
       <AuthModal />
