@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get('userId');
 
   // Generate SVG image based on action
-  const svg = await generateFrameImage(action, userId);
+  const svg = await generateFrameImage(action, userId || undefined);
 
   return new NextResponse(svg, {
     headers: {

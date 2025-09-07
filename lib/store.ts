@@ -16,6 +16,11 @@ interface TaskFlowState {
   isLoading: boolean;
   error: string | null;
   
+  // Modal states
+  isAddTaskModalOpen: boolean;
+  isAuthModalOpen: boolean;
+  isPremiumModalOpen: boolean;
+  
   // Premium features state
   hasNotificationAccess: boolean;
   hasProjectLinking: boolean;
@@ -35,6 +40,9 @@ interface TaskFlowState {
   setActiveSection: (section: string) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+  setAddTaskModalOpen: (open: boolean) => void;
+  setAuthModalOpen: (open: boolean) => void;
+  setPremiumModalOpen: (open: boolean) => void;
   setNotificationAccess: (access: boolean) => void;
   setProjectLinking: (access: boolean) => void;
   
@@ -63,6 +71,9 @@ export const useTaskFlowStore = create<TaskFlowState>()(
       activeSection: 'home',
       isLoading: false,
       error: null,
+      isAddTaskModalOpen: false,
+      isAuthModalOpen: false,
+      isPremiumModalOpen: false,
       hasNotificationAccess: false,
       hasProjectLinking: false,
 
@@ -120,6 +131,9 @@ export const useTaskFlowStore = create<TaskFlowState>()(
       setActiveSection: (section) => set({ activeSection: section }),
       setLoading: (loading) => set({ isLoading: loading }),
       setError: (error) => set({ error }),
+      setAddTaskModalOpen: (open) => set({ isAddTaskModalOpen: open }),
+      setAuthModalOpen: (open) => set({ isAuthModalOpen: open }),
+      setPremiumModalOpen: (open) => set({ isPremiumModalOpen: open }),
       setNotificationAccess: (access) => set({ hasNotificationAccess: access }),
       setProjectLinking: (access) => set({ hasProjectLinking: access }),
 

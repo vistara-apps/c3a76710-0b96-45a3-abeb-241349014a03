@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get('userId');
 
   // Generate Frame HTML based on action
-  const frameHtml = generateFrameHtml(action, userId);
+  const frameHtml = generateFrameHtml(action, userId || undefined);
 
   return new NextResponse(frameHtml, {
     headers: {

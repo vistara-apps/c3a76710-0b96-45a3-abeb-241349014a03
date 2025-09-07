@@ -22,7 +22,14 @@ export default function TaskFlowApp() {
     isLoading,
     error,
     isAuthenticated,
+    user,
+    tasks,
+    projects,
+    isAddTaskModalOpen,
     setActiveSection,
+    toggleTask,
+    setAddTaskModalOpen,
+    addTask,
   } = useTaskFlowStore();
 
   const { initializeAuth } = useAuth();
@@ -73,9 +80,9 @@ export default function TaskFlowApp() {
 
     switch (activeSection) {
       case 'today':
-        return <TodayView />;
+        return <TodayView tasks={tasks} projects={projects} onToggleTask={toggleTask} />;
       case 'projects':
-        return <ProjectsView />;
+        return <ProjectsView tasks={tasks} projects={projects} />;
       case 'settings':
         return (
           <div className="flex-1 p-8">
@@ -86,7 +93,7 @@ export default function TaskFlowApp() {
           </div>
         );
       default:
-        return <Dashboard />;
+        return <Dashboard tasks={tasks} projects={projects} onToggleTask={toggleTask} />;
     }
   };
 
@@ -96,7 +103,26 @@ export default function TaskFlowApp() {
       {renderContent()}
       
       {/* Modals */}
-      <AddTaskModal />
+      <AddTaskModal 
+        isOpen={isAddTaskModalOpen}
+        onClose={() => setAddTaskModalOpen(false)}
+        onAddTask={(taskData) => {
+          const newTask = {
+            taskId: `task-${Date.now()}`,
+            userId: user?.userId || 'anonymous',
+            title: taskData.title,
+            description: taskData.description || '',
+            isCompleted: false,
+            dueDate: taskData.dueDate,
+            projectId: taskData.projectId,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          };
+          addTask(newTask);
+          setAddTaskModalOpen(false);
+        }}
+        projects={projects}
+      />
       <AuthModal />
       <PremiumModal />
       
