@@ -27,7 +27,7 @@ export function TodayView({ tasks, projects, onToggleTask }: TodayViewProps) {
       <div className="mb-8">
         <div className="flex items-center space-x-3 mb-4">
           <Calendar className="w-8 h-8 text-purple-400" />
-          <h1 className="text-3xl font-bold text-white">Today's Tasks</h1>
+          <h1 className="text-3xl font-bold text-white">Today&apos;s Tasks</h1>
         </div>
         <p className="text-gray-300">
           {pendingToday.length} tasks remaining • {completedToday.length} completed
@@ -37,7 +37,7 @@ export function TodayView({ tasks, projects, onToggleTask }: TodayViewProps) {
       {/* Progress Bar */}
       <div className="glass-card p-6 mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-white">Today's Progress</h2>
+          <h2 className="text-lg font-semibold text-white">Today&apos;s Progress</h2>
           <span className="text-2xl font-bold text-white">
             {todayTasks.length > 0 ? Math.round((completedToday.length / todayTasks.length) * 100) : 0}%
           </span>

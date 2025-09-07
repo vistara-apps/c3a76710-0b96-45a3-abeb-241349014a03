@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const NEYNAR_API_BASE = 'https://api.neynar.com/v2';
-const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY;
+const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY || 'placeholder-key';
 
 export interface FarcasterUser {
   fid: number;
@@ -27,16 +27,20 @@ class NeynarService {
   private apiKey: string;
 
   constructor() {
-    if (!NEYNAR_API_KEY) {
+    this.apiKey = NEYNAR_API_KEY;
+  }
+
+  private ensureApiKey(): string {
+    if (this.apiKey === 'placeholder-key') {
       throw new Error('NEYNAR_API_KEY is required');
     }
-    this.apiKey = NEYNAR_API_KEY;
+    return this.apiKey;
   }
 
   private getHeaders() {
     return {
       'accept': 'application/json',
-      'api_key': this.apiKey,
+      'api_key': this.ensureApiKey(),
       'Content-Type': 'application/json',
     };
   }
